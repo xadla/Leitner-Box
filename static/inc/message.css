@@ -1,8 +1,8 @@
 .message-box{
     position: fixed;
-    color: #133E87;
+    color: #4A628A;
     padding: 5px 20px;
-    background-color: rgba(107, 116, 133, 0.6);
+    background-color: #FFF1DB;
     border-radius: 10px;
     margin: 20px;
 }

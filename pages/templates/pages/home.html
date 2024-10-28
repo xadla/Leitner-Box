@@ -1,8 +1,34 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block style %} {% static 'pages/home.css' %} {% endblock style %}
 
 {% block content %}
 
-    <h1>Lietner Box</h1>
+    <header class="header">
 
+        <h1>Leitner Box</h1>
+
+        <div class="box">
+            <a href="{% url 'boxes:add_box' %}">Add Box Word</a>
+            <a href="{% url 'boxes:add_word' %}">Add New Word</a>
+        </div>
+
+    </header>
+
+    <main class="main">
+
+        <h2>All Boxes</h2>
+        <div class="boxes">
+            <ul>
+                <a href="#"><li>Box Level One({{ number1 }}/1)</li></a>
+                <a href="#"><li>Box Level Two({{ number2 }}/2)</li></a>
+                <a href="#"><li>Box Level Three({{ number3 }}/4)</li></a>
+                <a href="#"><li>Box Level Four({{ number4 }}/8)</li></a>
+                <a href="#"><li>Box Level Five({{ number5 }}/15)</li></a>
+            </ul>
+        </div>
+
+    </main>
     
 {% endblock content %}

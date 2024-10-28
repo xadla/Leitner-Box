@@ -14,3 +14,11 @@ class AddWordForm(forms.Form):
             attrs={"class": "explain_word", "placeholder": "Enter The Info..."}
         ),
     )
+
+class AddBoxForm(forms.Form):
+
+    capacity = forms.IntegerField(
+        min_value=1,
+        max_value=100,
+        required=False
+    )

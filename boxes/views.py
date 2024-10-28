@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib import messages
 
-from .forms import AddWordForm
+from .forms import AddWordForm, AddBoxForm
 from .models import (
     Word,
     BoxWord,
@@ -27,45 +27,14 @@ class AddWord(View):
             newWord.box = boxWords  
             boxWords.size += 1
             boxWords.save()
+            newWord.save()
+            messages.success(request, "New Word is created")
+            return True
+        
         else:
-            boxWords = BoxWord.objects.create()
-            
-            level_one = BoxLevelOne.objects.first()
-            level_two = BoxLevelTwo.objects.first()
-            level_three = BoxLevelThree.objects.first()
-            level_four = BoxLevelFour.objects.first()
-            level_five = BoxLevelFive.objects.first()
-
-            if level_one and level_one.size < 1:
-                boxWords.box_level_one = level_one
-                level_one.size += 1
-                level_one.save()
-            
-            elif level_two and level_two.size < 2:
-                boxWords.box_level_two = level_two
-                level_two.size += 1
-                level_two.save()
-
-            elif level_three and level_three.size < 4:
-                boxWords.box_level_three = level_three
-                level_three.size += 1
-                level_three.save()
-            
-            elif level_four and level_four.size < 8:
-                boxWords.box_level_four = level_four
-                level_four.size += 1
-                level_four.save()
-            
-            elif level_five and level_five.size < 15:
-                boxWords.box_level_five = level_five
-                level_five.size += 1
-                level_five.save()
-            
-            boxWords.size += 1
-            boxWords.save()
-            newWord.box = boxWords
-
-        newWord.save()
+            messages.error(request, "There is no Box for add word!")
+            return False
+        
 
     def get(self, request):
         form = self.class_form()
@@ -77,9 +46,55 @@ class AddWord(View):
         if form.is_valid():
 
             cd = form.cleaned_data
-            self.add_item(cd["name"], cd["explain"])
-
-            messages.success(request, "New Word is created")
-            return redirect("pages:home")
+            if self.add_item(cd["name"], cd["explain"]):
+                return redirect("pages:home")
+            else:
+                return render(request, self.template_name, {"form": form})
 
         return render(request, self.template_name, {"form": form})
+
+
+class AddBox(View):
+
+    class_form = AddBoxForm
+    template_name = "boxes/box.html"
+
+    def add_item(self, request, capacity):
+
+        if BoxLevelOne.objects.first().size == 0:
+            newBox = BoxWord.objects.create(capacity=capacity, size=0)
+            newBox.box_level_one = BoxLevelOne.objects.first()
+            newBox.save()
+            messages.success(request, "New Box is created")
+
+        else:
+            messages.error(request, "first answer the first box")
+
+    def get(self, request):
+        form = self.class_form()
+        return render(request, self.template_name, {"form": form})
+
+    def post(self, request):
+        form = self.class_form(request.POST)
+
+        if form.is_valid():
+            
+            cap = form.cleaned_data["capacity"]
+            if cap > 0:
+                self.add_item(request, cap)
+                return redirect("pages:home")
+
+            else:
+                return render(request, self.template_name, {"form": form})
+
+class BoxesView(View):
+
+    template_name = "boxes/boxes.html"
+
+    def get(self, request):
+
+        # box = BoxLevelOne.objects.first()
+        # boxWords = box.box_words_one.first()
+        # words = boxWords.words.all()
+
+        return render(request, self.template_name, {"box": boxWords, "words": words})
