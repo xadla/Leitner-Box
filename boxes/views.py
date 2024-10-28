@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
+from django.contrib import messages
 
 from .forms import AddWordForm
 from .models import (
@@ -78,6 +79,7 @@ class AddWord(View):
             cd = form.cleaned_data
             self.add_item(cd["name"], cd["explain"])
 
+            messages.success(request, "New Word is created")
             return redirect("pages:home")
 
         return render(request, self.template_name, {"form": form})
