@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %} {% static "boxes/boxes.css" %} {% endblock style %}
+
+{% block content %}
+
+    <h1>Boxes in Level {{ id }}</h1>
+
+    {% if words %}
+    <div class="container">
+        {% for word in words %}
+        <div class="word-box">
+            <h3>The Box number {{ forloop.counter }}</h3>
+            {% for w in word %}
+            <div class="word-detail">
+                <h5>{{ w.name }}</h5>
+                <p>{{ w.explain }}</p>
+                <a href="#" class="edit">Edit</a>
+                <a href="#" class="remove">Remove</a>
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+        <h2>This Box is Empty</h2>
+    {% endif %}
+
+{% endblock content %}

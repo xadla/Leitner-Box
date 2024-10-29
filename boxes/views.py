@@ -91,10 +91,61 @@ class BoxesView(View):
 
     template_name = "boxes/boxes.html"
 
-    def get(self, request):
+    def get(self, request, id):
+        
+        box = BoxLevelOne.objects.first()
+        boxWords = box.box_words_one.all()
+        words = []
+        if boxWords:
+            for bWord in boxWords:
+                words.append(list(bWord.words.all()))
 
-        # box = BoxLevelOne.objects.first()
-        # boxWords = box.box_words_one.first()
-        # words = boxWords.words.all()
+        if id == 2:
+            box = BoxLevelTwo.objects.first()
+            boxWords = box.box_words_two.all()
+            if boxWords:
+                words = []
+                for bWord in boxWords:
+                    words.append(list(bWord.words.all()))
 
-        return render(request, self.template_name, {"box": boxWords, "words": words})
+            else:
+                words = None
+        
+        elif id == 3:
+            box = BoxLevelThree.objects.first()
+            boxWords = box.box_words_three.all()
+            if boxWords:
+                words = []
+                for bWord in boxWords:
+                    words.append(list(bWord.words.all()))
+            
+            else:
+                words = None
+
+        elif id == 4:
+            box = BoxLevelFour.objects.first()
+            boxWords = box.box_words_four.all()
+            if boxWords:
+                words = []
+                for bWord in boxWords:
+                    words.append(list(bWord.words.all()))
+            
+            else:
+                words = None
+        
+        elif id == 5:
+            box = BoxLevelFive.objects.first()
+            boxWords = box.box_words_five.all()
+            if boxWords:
+                words = []
+                for bWord in boxWords:
+                    words.append(list(bWord.words.all()))
+
+            else:
+                words = None
+
+        return render(
+            request,
+            self.template_name,
+            {"box": boxWords, "words": words, "id": id},
+            )

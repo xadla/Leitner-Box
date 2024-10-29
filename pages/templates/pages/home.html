@@ -21,11 +21,11 @@
         <h2>All Boxes</h2>
         <div class="boxes">
             <ul>
-                <a href="#"><li>Box Level One({{ number1 }}/1)</li></a>
-                <a href="#"><li>Box Level Two({{ number2 }}/2)</li></a>
-                <a href="#"><li>Box Level Three({{ number3 }}/4)</li></a>
-                <a href="#"><li>Box Level Four({{ number4 }}/8)</li></a>
-                <a href="#"><li>Box Level Five({{ number5 }}/15)</li></a>
+                <a href="{% url 'boxes:boxes_view' 1 %}"><li>Box Level One({{ number1 }}/1)</li></a>
+                <a href="{% url 'boxes:boxes_view' 2 %}"><li>Box Level Two({{ number2 }}/2)</li></a>
+                <a href="{% url 'boxes:boxes_view' 3 %}"><li>Box Level Three({{ number3 }}/4)</li></a>
+                <a href="{% url 'boxes:boxes_view' 4 %}"><li>Box Level Four({{ number4 }}/8)</li></a>
+                <a href="{% url 'boxes:boxes_view' 5 %}"><li>Box Level Five({{ number5 }}/15)</li></a>
             </ul>
         </div>
 
