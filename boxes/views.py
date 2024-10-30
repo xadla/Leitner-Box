@@ -13,7 +13,7 @@ from .models import (
     BoxLevelFive,
 )
 
-class AddWord(View):
+class AddWordView(View):
 
     class_form = AddWordForm
     template_name = "boxes/word.html"
@@ -54,7 +54,7 @@ class AddWord(View):
         return render(request, self.template_name, {"form": form})
 
 
-class AddBox(View):
+class AddBoxView(View):
 
     class_form = AddBoxForm
     template_name = "boxes/box.html"
@@ -149,3 +149,94 @@ class BoxesView(View):
             self.template_name,
             {"box": boxWords, "words": words, "id": id},
             )
+
+
+class WordEditView(View):
+
+    class_form = AddWordForm
+    template_name = "boxes/edit_word.html"
+
+    def get(self, request, id, red):
+
+        try:
+            word = Word.objects.get(pk=id)
+
+            form = self.class_form(initial={
+                "name": word.name,
+                "explain": word.explain,
+            })
+
+            return render(request, self.template_name, {"form": form})
+
+        except Word.DoesNotExist:
+            messages.error(request, "Word does not found")
+            return redirect("pages:home")
+
+    def post(self, request, id, red):
+
+        form = self.class_form(request.POST)
+        if form.is_valid():
+            try:
+                word = Word.objects.get(pk=id)
+                word.name = form.cleaned_data["name"]
+                word.explain = form.cleaned_data["explain"]
+
+                word.save()
+                messages.success(request, "Word is edited wuccessfully")
+
+                return redirect("boxes:boxes_view", id=red)
+
+            except Word.DoesNotExist:
+
+                messages.error(request, "Word Does not exist")
+                return redirect("pages:home")
+
+
+class WordDeleteView(View):
+
+    def get(self, request, id):
+
+        try:
+            word = Word.objects.get(pk=id)
+            word.delete()
+
+            messages.success(request, "Word is deleted")
+
+            return redirect(request.META.get('HTTP_REFERER', 'pages:home'))
+        
+        except Word.DoesNotExist:
+
+            messages.error(request, "Word does not exist")
+            return redirect("pages:home")
+
+
+class ShiftBoxes(View):
+    
+    template_name = "boxes/shift.html"
+
+    def get(self, request):
+
+        box1 = BoxLevelOne.objects.first().box_words_one.last()
+        box2 = BoxLevelTwo.objects.first().box_words_two.last()
+        box3 = BoxLevelThree.objects.first().box_words_three.last()
+        box4 = BoxLevelFour.objects.first().box_words_four.last()
+        box5 = BoxLevelFive.objects.first().box_words_five.last()
+        
+        words = []
+
+        if box1:
+            words.append(list(box1.words.all()))
+        
+        if box2:
+            words.append(list(box2.words.all()))
+
+        if box3:
+            words.append(list(box3.words.all()))
+        
+        if box4:
+            words.append(list(box4.words.all()))
+        
+        if box5:
+            words.append(list(box5.words.all()))
+
+        return render(request, self.template_name, {"words": words})

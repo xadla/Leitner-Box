@@ -16,15 +16,19 @@
             <div class="word-detail">
                 <h5>{{ w.name }}</h5>
                 <p>{{ w.explain }}</p>
-                <a href="#" class="edit">Edit</a>
-                <a href="#" class="remove">Remove</a>
+                <a href="{% url 'boxes:edit_word' w.id id %}" class="edit">Edit</a>
+                <a href="{% url 'boxes:delete_word' w.id %}" class="remove">Remove</a>
             </div>
             {% endfor %}
         </div>
         {% endfor %}
     </div>
     {% else %}
+
+    <div class="empty">
         <h2>This Box is Empty</h2>
+    </div>
+
     {% endif %}
 
 {% endblock content %}

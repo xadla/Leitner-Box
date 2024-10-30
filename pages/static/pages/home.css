@@ -66,3 +66,26 @@
     color: #536493;
     width: 100%;
 }
+
+.shift{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.shift a{
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 2rem;
+    color: #133E87;
+    background-color: #CBDCEB;
+    text-align: center;
+    width: 100%;
+    border-radius: 10px;
+    max-width: 600px;
+    transition: background-color 0.3s ease;
+}
+
+.shift a:hover{
+    background-color: #C6E7FF;
+}

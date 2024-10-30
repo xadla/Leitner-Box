@@ -68,3 +68,10 @@ h1{
     background-color: #F95454;
     color: #fff;
 }
+
+.empty{
+    width: 100%;
+    text-align: center;
+    font-size: 2rem;
+    color: #3B1E54;
+}

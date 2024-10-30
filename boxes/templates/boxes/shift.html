@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    {% for word in words %}
+        {% for w in word %}
+            <p>{{ w.name }}</p>
+        {% endfor %}
+        <hr>
+    {% endfor %}
+
+{% endblock content %}
