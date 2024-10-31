@@ -15,7 +15,8 @@
             {% for w in word %}
             <div class="word-detail">
                 <h5>{{ w.name }}</h5>
-                <p>{{ w.explain }}</p>
+                <p>{{ w.example }}</p>
+                <p>{{ w.definition }}</p>
                 <a href="{% url 'boxes:edit_word' w.id id %}" class="edit">Edit</a>
                 <a href="{% url 'boxes:delete_word' w.id %}" class="remove">Remove</a>
             </div>
@@ -30,5 +31,11 @@
     </div>
 
     {% endif %}
+
+    {% for b in box %}
+
+    <a href="{% url 'boxes:box_detail' b.id %}"> box {{ b.id }} </a>
+
+    {% endfor %}
 
 {% endblock content %}

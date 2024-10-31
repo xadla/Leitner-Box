@@ -18,74 +18,78 @@ class AddWordView(View):
     class_form = AddWordForm
     template_name = "boxes/word.html"
 
-    def add_item(self, name, explain):
-        newWord = Word(name=name, explain=explain)
-        
-        boxWords = BoxWord.objects.filter(size__lt=10).first()
-        
-        if boxWords:
-            newWord.box = boxWords  
-            boxWords.size += 1
-            boxWords.save()
-            newWord.save()
-            messages.success(request, "New Word is created")
-            return True
-        
-        else:
-            messages.error(request, "There is no Box for add word!")
-            return False
-        
-
-    def get(self, request):
+    def get(self, request, box_id):
         form = self.class_form()
         return render(request, self.template_name, {"form": form})
 
-    def post(self, request):
+    def post(self, request, box_id):
         form = self.class_form(request.POST)
-        
+
         if form.is_valid():
 
             cd = form.cleaned_data
-            if self.add_item(cd["name"], cd["explain"]):
+            try:
+                box = BoxWord.objects.get(pk=box_id)
+
+                word = Word.objects.create(
+                    name=cd["name"],
+                    example=cd["example"],
+                    definition=cd["definition"],
+                    box=box,
+                )
+                word.save()
+
+                messages.success(request, "New word is created")
+
+                return redirect("boxes:box_detail", box_id)
+
+            except BoxWord.DoesNotExist:
+                messages.error(request, "This box is not exist!")
                 return redirect("pages:home")
-            else:
-                return render(request, self.template_name, {"form": form})
+
 
         return render(request, self.template_name, {"form": form})
+
+
+class BoxWordView(View):
+
+    template_name = "boxes/box_word.html"
+
+    def get(self, request, id):
+
+        try:
+            box = BoxWord.objects.get(pk=id)
+            words = box.words.all()
+
+            return render(request, self.template_name, {"words": words, "id": id})
+
+
+        except Word.DoesNotExist:
+            messages.error(request, "This box is not exist")
+            return redirect("pages:home")
 
 
 class AddBoxView(View):
 
-    class_form = AddBoxForm
     template_name = "boxes/box.html"
 
-    def add_item(self, request, capacity):
-
-        if BoxLevelOne.objects.first().size == 0:
-            newBox = BoxWord.objects.create(capacity=capacity, size=0)
-            newBox.box_level_one = BoxLevelOne.objects.first()
-            newBox.save()
-            messages.success(request, "New Box is created")
-
-        else:
-            messages.error(request, "first answer the first box")
-
     def get(self, request):
-        form = self.class_form()
-        return render(request, self.template_name, {"form": form})
 
-    def post(self, request):
-        form = self.class_form(request.POST)
+        boxLevelOne = BoxLevelOne.objects.first()
 
-        if form.is_valid():
-            
-            cap = form.cleaned_data["capacity"]
-            if cap > 0:
-                self.add_item(request, cap)
-                return redirect("pages:home")
+        if boxLevelOne.size > 0:
+            messages.error(request, "You can't create new Box word")
+            return redirect("pages:home")
+        
+        newBox = BoxWord.objects.create(box_level_one=boxLevelOne)
+        newBox.save()
+        boxLevelOne.size += 1
+        boxLevelOne.save()
 
-            else:
-                return render(request, self.template_name, {"form": form})
+        messages.success(request, "New Box is created")
+
+        return redirect("boxes:box_detail", id=newBox.id)
+
 
 class BoxesView(View):
 
@@ -163,7 +167,8 @@ class WordEditView(View):
 
             form = self.class_form(initial={
                 "name": word.name,
-                "explain": word.explain,
+                "example": word.example,
+                "definition": word.definition,
             })
 
             return render(request, self.template_name, {"form": form})
@@ -179,10 +184,10 @@ class WordEditView(View):
             try:
                 word = Word.objects.get(pk=id)
                 word.name = form.cleaned_data["name"]
-                word.explain = form.cleaned_data["explain"]
+                word.example = form.cleaned_data["example"]
 
                 word.save()
-                messages.success(request, "Word is edited wuccessfully")
+                messages.success(request, "Word is edited successfully")
 
                 return redirect("boxes:boxes_view", id=red)
 

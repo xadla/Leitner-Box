@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.urls import reverse
 
 class AbstractBox(models.Model):
 
@@ -75,9 +75,6 @@ class BoxLevelFive(AbstractBox):
 
 class BoxWord(models.Model):
 
-    capacity = models.IntegerField(default=10)
-    size = models.IntegerField(default=0)
-
     box_level_one = models.ForeignKey(
         BoxLevelOne,
         related_name="box_words_one",
@@ -114,6 +111,9 @@ class BoxWord(models.Model):
         on_delete=models.CASCADE
     )
 
+    def get_absolute_url():
+        return reverse("boxes:box_detail", kwargs={"id": self.pk})
+
     class Meta:
         verbose_name = "Box Word"
         verbose_name_plural = "Box Words"
@@ -122,7 +122,8 @@ class BoxWord(models.Model):
 class Word(models.Model):
 
     name = models.CharField(max_length=200, unique=True)
-    explain = models.TextField()
+    example = models.TextField(null=True, blank=True)
+    definition = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
 
     box = models.ForeignKey(

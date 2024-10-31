@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    {% if words %}
+        {% for word in words %}
+            <p>{{ word }}</p>
+        {% endfor %}
+    {% else %}
+        <h1>There is no Word in this box</h1>
+    {% endif %}
+
+    <a href="{% url 'boxes:add_word' id %}">Add New Word</a>
+
+{% endblock content %}

@@ -9,10 +9,18 @@ class AddWordForm(forms.Form):
         ),
     )
 
-    explain = forms.CharField(
+    example = forms.CharField(
         widget=forms.Textarea(
             attrs={"class": "explain_word", "placeholder": "Enter The Info..."}
         ),
+        required=False,
+    )
+
+    definition = forms.CharField(
+        widget=forms.Textarea(
+            attrs={"class": "explain_word", "placeholder": "Enter The Definition..."}
+        ),
+        required=False,
     )
 
 class AddBoxForm(forms.Form):
