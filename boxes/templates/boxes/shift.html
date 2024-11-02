@@ -3,10 +3,19 @@
 {% block content %}
 
     {% for word in words %}
+        <h1>The {{ forloop.counter }}th Box</h1>
         {% for w in word %}
             <p>{{ w.name }}</p>
+            <p>{{ w.explain }}</p>
+
+            <a href="{% url 'boxes:unknown_word' w.id %}">Unknown</a>
+            <br>
         {% endfor %}
         <hr>
+    {% endfor %}
+
+    {% for id in bId %}
+        <a href="{% url 'boxes:shift_box' id %}">Shift Box {{ forloop.counter }}</a>
     {% endfor %}
 
 {% endblock content %}

@@ -73,6 +73,16 @@ class BoxLevelFive(AbstractBox):
         verbose_name_plural = "Boxes Level 5"
 
 
+class Temp(models.Model):
+
+    def __str__(self):
+        return "Temp Box"
+    
+    class Meta:
+        verbose_name = "Temp Box"
+        verbose_name_plural = "Temp Boxes"
+
+
 class BoxWord(models.Model):
 
     box_level_one = models.ForeignKey(
@@ -130,6 +140,16 @@ class Word(models.Model):
         BoxWord,
         related_name="words",
         on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
+
+    box_temp = models.ForeignKey(
+        Temp,
+        related_name="words",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
     )
 
     def __str__(self):

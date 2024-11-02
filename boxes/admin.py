@@ -8,6 +8,7 @@ from .models import (
     BoxLevelFive,
     BoxWord,
     Word,
+    Temp
 )
 
 
@@ -18,3 +19,4 @@ admin.site.register(BoxLevelFour)
 admin.site.register(BoxLevelFive)
 admin.site.register(Word)
 admin.site.register(BoxWord)
+admin.site.register(Temp)

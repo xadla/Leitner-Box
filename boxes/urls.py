@@ -8,6 +8,8 @@ from .views import (
     WordEditView,
     WordDeleteView,
     ShiftBoxes,
+    UnknownWordView,
+    ShiftBoxView,
 )
 
 app_name = "boxes"
@@ -18,5 +20,7 @@ urlpatterns = [
     path("<int:id>/", BoxesView.as_view(), name="boxes_view"),
     path("word/edit/<int:id>/<int:red>/", WordEditView.as_view(), name="edit_word"),
     path("word/delete/<int:id>/", WordDeleteView.as_view(), name="delete_word"),
-    path("shift", ShiftBoxes.as_view(), name="shift"),
+    path("shift/", ShiftBoxes.as_view(), name="shift"),
+    path("unknown/<int:id_word>/", UnknownWordView.as_view(), name="unknown_word"),
+    path("shift/<int:id_box>/", ShiftBoxView.as_view(), name="shift_box"),
 ]
