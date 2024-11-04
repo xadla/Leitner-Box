@@ -11,10 +11,10 @@
         {% for word in words %}
         <div class="words-box">
             <h4>{{ word }}</h4>
-            <p>{{ word.definition }}</p>
+            <p>{{ word.definition|safe }}</p>
             <div class="examples">
                 <h3>Example:</h3>
-                <p>{{ word.example }}</p>
+                <p>{{ word.example|safe }}</p>
             </div>
         </div>
         {% endfor %}

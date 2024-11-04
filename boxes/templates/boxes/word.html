@@ -1,6 +1,23 @@
-<form method="post" action="">{% csrf_token %}
+{% extends "base.html" %}
+{% load static %}
 
-    {{ form.as_p }}
-    <input type="submit">
+{% block style%} {% static "boxes/word.css" %} {% endblock style %}
 
-</form>
+{% block content %}
+<div class="container">
+
+    <form method="post" action="">{% csrf_token %}
+
+        <label for="id_name" class="labels">Name</label> <br>
+        {{ form.name }} <br>
+        <label for="id_example" class="labels">Example</label> <br>
+        {{ form.example }} <br>
+        <label for="id_definition" class="labels">Definition</label> <br>
+        {{ form.definition }} <br>
+        <input type="submit" value="Create" class="submit">
+    
+    </form>
+
+</div>
+
+{% endblock content %}

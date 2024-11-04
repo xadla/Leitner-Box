@@ -11,7 +11,7 @@
             {% for word in words1 %}
             <div class="word">
                 <h5>{{ word }}</h5>
-                <p>{{ word.example }}</p>
+                <p>{{ word.example|safe }}</p>
                 <a href="{% url 'boxes:unknown_word' word.id %}">Unknown</a>
             </div>
             {% endfor %}
@@ -25,7 +25,7 @@
             {% for word in words2 %}
             <div class="word">
                 <h5>{{ word }}</h5>
-                <p>{{ word.example }}</p>
+                <p>{{ word.example|safe }}</p>
                 <a href="{% url 'boxes:unknown_word' word.id %}">Unknown</a>
             </div>
             {% endfor %}
@@ -39,7 +39,7 @@
             {% for word in words3 %}
             <div class="word">
                 <h5>{{ word }}</h5>
-                <p>{{ word.example }}</p>
+                <p>{{ word.example|safe }}</p>
                 <a href="{% url 'boxes:unknown_word' word.id %}">Unknown</a>
             </div>
             {% endfor %}
@@ -54,7 +54,7 @@
             {% for word in words4 %}
             <div class="word">
                 <h5>{{ word }}</h5>
-                <p>{{ word.example }}</p>
+                <p>{{ word.example|safe }}</p>
                 <a href="{% url 'boxes:unknown_word' word.id %}">Unknown</a>
             </div>
             {% endfor %}
@@ -68,7 +68,7 @@
             {% for word in words5 %}
             <div class="word">
                 <h5>{{ word }}</h5>
-                <p>{{ word.example }}</p>
+                <p>{{ word.example|safe }}</p>
                 <a href="{% url 'boxes:unknown_word' word.id %}">Unknown</a>
             </div>
             {% endfor %}

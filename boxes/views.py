@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib import messages
 
-from .forms import AddWordForm, AddBoxForm
+from .forms import AddWordForm
 from .models import (
     Word,
     BoxWord,
@@ -61,6 +61,10 @@ class BoxWordView(View):
         try:
             box = BoxWord.objects.get(pk=id)
             words = box.words.all()
+
+            for word in words:
+                word.example = word.example.replace("\n", "<br>")
+                word.definition = word.definition.replace("\n", "<br>")
 
             return render(request, self.template_name, {"words": words, "id": id})
 
@@ -158,6 +162,11 @@ class BoxesView(View):
             else:
                 words = None
 
+        for word in words:
+            for w in word:
+                w.example = w.example.replace("\n", "<br>")
+                w.definition = w.definition.replace("\n", "<br>")
+
         return render(
             request,
             self.template_name,
@@ -195,6 +204,7 @@ class WordEditView(View):
                 word = Word.objects.get(pk=id)
                 word.name = form.cleaned_data["name"]
                 word.example = form.cleaned_data["example"]
+                word.definition = form.cleaned_data["definition"]
 
                 word.save()
                 messages.success(request, "Word is edited successfully")
@@ -272,6 +282,26 @@ class ShiftBoxes(View):
             words5 = box5.words.all()
             box_id5 = box5.id
 
+        for word in words1:
+            word.example = word.example.replace("\n", "<br>")
+            word.definition = word.definition.replace("\n", "<br>")
+
+        for word in words2:
+            word.example = word.example.replace("\n", "<br>")
+            word.definition = word.definition.replace("\n", "<br>")
+
+        for word in words3:
+            word.example = word.example.replace("\n", "<br>")
+            word.definition = word.definition.replace("\n", "<br>")
+
+        for word in words4:
+            word.example = word.example.replace("\n", "<br>")
+            word.definition = word.definition.replace("\n", "<br>")
+        
+        for word in words5:
+            word.example = word.example.replace("\n", "<br>")
+            word.definition = word.definition.replace("\n", "<br>")
+
         return render(request, self.template_name, {
             "words1": words1, "id1": box_id1,
             "words2": words2, "id2": box_id2,
@@ -342,7 +372,7 @@ class ShiftBoxView(View):
                 else:
                     messages.error(request, "Next Level is full!")
                     return redirect(request.META.get('HTTP_REFERER', 'pages:home'))
-            
+
             elif box.box_level_three:
 
                 newBox = BoxLevelFour.objects.first()

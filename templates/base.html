@@ -12,6 +12,16 @@
 
     {% include "inc/message.html" %}
 
+    <header class="header">
+
+        <a href="{% url 'pages:home' %}"><h1>Leitner Box</h1></a>
+
+        <div class="box">
+            <a href="{% url 'boxes:add_box' %}">Add Box Word</a>
+        </div>
+
+    </header>
+
     {% block content %}
     {% endblock content %}
     

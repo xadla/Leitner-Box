@@ -1,11 +1,23 @@
 {% extends "base.html" %}
+{% load static %}
 
+{% block style%} {% static "boxes/word.css" %} {% endblock style %}
 
 {% block content %}
+<div class="container">
 
-    <form action="" method="post">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Edit</button>
+    <form method="post" action="">{% csrf_token %}
+
+        <label for="id_name" class="labels">Name</label> <br>
+        {{ form.name }} <br>
+        <label for="id_example" class="labels">Example</label> <br>
+        {{ form.example }} <br>
+        <label for="id_definition" class="labels">Definition</label> <br>
+        {{ form.definition }} <br>
+        <input type="submit" value="Edit" class="submit">
+    
     </form>
+
+</div>
 
 {% endblock content %}

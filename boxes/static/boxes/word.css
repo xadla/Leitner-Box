@@ -1,0 +1,45 @@
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.container form{
+    padding: 50px;
+    background-color: #D6C0B3;
+    width: 100%;
+    max-width: 1200px;
+    border-radius: 10px;
+}
+
+.name_word, .explain_word{
+    padding: 10px 5px;
+    outline: none;
+    border-radius: 5px;
+    background-color: #E4E0E1;
+    color: #493628;
+    border: none;
+    width: 100%;
+    font-size: 1.5rem;
+    resize: none;
+}
+
+.submit{
+    width: 100%;
+    outline: none;
+    border: none;
+    padding: 10px;
+    max-width: 500px;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #789DBC;
+    color: #DFF2EB;
+}
+
+.labels{
+    margin: 10px 0;
+    font-size: 2rem;
+    display: block;
+}
