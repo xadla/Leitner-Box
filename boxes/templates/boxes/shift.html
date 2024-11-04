@@ -1,21 +1,79 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block style %}{% static "boxes/shift.css" %}{% endblock style %}
 
 {% block content %}
 
-    {% for word in words %}
-        <h1>The {{ forloop.counter }}th Box</h1>
-        {% for w in word %}
-            <p>{{ w.name }}</p>
-            <p>{{ w.explain }}</p>
+    {% if words1 %}
+        <div class="words">
+            <h2>Words in First Box</h2>
+            {% for word in words1 %}
+            <div class="word">
+                <h5>{{ word }}</h5>
+                <p>{{ word.example }}</p>
+                <a href="{% url 'boxes:unknown_word' word.id %}">Unknown</a>
+            </div>
+            {% endfor %}
+            <a href="{% url 'boxes:shift_box' id1 %}">Shift First Box</a>
+        </div>
+    {% endif %}
 
-            <a href="{% url 'boxes:unknown_word' w.id %}">Unknown</a>
-            <br>
-        {% endfor %}
-        <hr>
-    {% endfor %}
+    {% if words2 %}
+        <div class="words">
+            <h2>Words in Second Box</h2>
+            {% for word in words2 %}
+            <div class="word">
+                <h5>{{ word }}</h5>
+                <p>{{ word.example }}</p>
+                <a href="{% url 'boxes:unknown_word' word.id %}">Unknown</a>
+            </div>
+            {% endfor %}
+            <a href="{% url 'boxes:shift_box' id2 %}">Shift Second Box</a>
+        </div>
+    {% endif %}
 
-    {% for id in bId %}
-        <a href="{% url 'boxes:shift_box' id %}">Shift Box {{ forloop.counter }}</a>
-    {% endfor %}
+    {% if words3 %}
+        <div class="words">
+            <h2>Words in Third Box</h2>
+            {% for word in words3 %}
+            <div class="word">
+                <h5>{{ word }}</h5>
+                <p>{{ word.example }}</p>
+                <a href="{% url 'boxes:unknown_word' word.id %}">Unknown</a>
+            </div>
+            {% endfor %}
+            <a href="{% url 'boxes:shift_box' id3 %}">Shift Third Box</a>
+        </div>
+    {% endif %}
+
+
+    {% if words4 %}
+        <div class="words">
+            <h2>Words in Fourth Box</h2>
+            {% for word in words4 %}
+            <div class="word">
+                <h5>{{ word }}</h5>
+                <p>{{ word.example }}</p>
+                <a href="{% url 'boxes:unknown_word' word.id %}">Unknown</a>
+            </div>
+            {% endfor %}
+            <a href="{% url 'boxes:shift_box' id4 %}">Shift Fourth Box</a>
+        </div>
+    {% endif %}
+
+    {% if words5 %}
+        <div class="words">
+            <h2>Words in Fifth Box</h2>
+            {% for word in words5 %}
+            <div class="word">
+                <h5>{{ word }}</h5>
+                <p>{{ word.example }}</p>
+                <a href="{% url 'boxes:unknown_word' word.id %}">Unknown</a>
+            </div>
+            {% endfor %}
+            <a href="{% url 'boxes:shift_box' id5 %}">Shift Fifth Box</a>
+        </div>
+    {% endif %}
 
 {% endblock content %}

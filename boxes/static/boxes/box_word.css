@@ -1,0 +1,91 @@
+p{
+    font-size: 1.2rem;
+}
+
+.words{
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.words h2{
+    font-size: 3rem;
+    font-weight: normal;
+    color: #000B58;
+    padding: 20px;
+}
+
+.words-box{
+    text-align: left;
+}
+
+.words-box{
+    padding: 50px;
+    background-color: #FBFBFB;
+    margin: 10px 0;
+    border-radius: 20px;
+    box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+}
+
+.words-box h4{
+    font-size: 2rem;
+    font-weight: 200;
+    color: #133E87;
+    margin: 20px 0;
+}
+
+.words-box p{
+    background-color: #D4F6FF;
+    padding: 10px;
+    border-radius: 10px;
+    color: #3D0301;
+    margin: 10px 0;
+}
+
+.examples{
+    background-color: #F3F3E0;
+    color: #FF4545;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.examples p{
+    background-color: transparent;
+    padding: 0;
+    color: #3B1E54;
+}
+
+.add-word{
+    width: 100%;
+    max-width: 500px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.add-word a{
+    width: 100%;
+    text-decoration: none;
+    padding: 10px;
+    color: #4A628A;
+    background-color: #DFF2EB;
+    display: block;
+    border-radius: 5px;
+    transition: background-color 0.5s ease;
+}
+
+.add-word a:hover{
+    background-color: #B9E5E8;
+}
+
+h1{
+    font-size: 2rem;
+    background-color: #789DBC;
+    width: 100%;
+    max-width: 1200px;
+    text-align: center;
+    margin: 20px auto;
+    padding: 20px;
+    color: #FFF1DB;
+    font-weight: 100;
+}

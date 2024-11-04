@@ -43,7 +43,7 @@ h1{
 }
 
 .word-detail p{
-    background-color: #B9E5E8;
+    background-color: #fff;
     padding: 20px 10px;
     border-radius: 5px;
     color: #1A1A19;
@@ -62,11 +62,21 @@ h1{
 .edit{
     background-color: #37AFE1;
     color: #fff;
+    transition: background-color 0.3s ease-in;
+}
+
+.edit:hover{
+    background-color: #24699b;
 }
 
 .remove{
     background-color: #F95454;
     color: #fff;
+    transition: background-color 0.3s ease-in;
+}
+
+.remove:hover{
+    background-color: rgb(122, 37, 37);
 }
 
 .empty{
@@ -74,4 +84,28 @@ h1{
     text-align: center;
     font-size: 2rem;
     color: #3B1E54;
+}
+
+.click-box{
+    width: 100%;
+    margin: 30px auto;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    font-size: 2rem;
+    color: #fff;
+    background-color: #77CDFF;
+    max-width: 500px;
+    border-radius: 30px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.click-box:hover{
+    background-color: #0D92F4;
+}
+
+.word-box h2{
+    text-align: center;
+    font-size: 2rem;
+    color: #000B58;
 }

@@ -237,30 +237,49 @@ class ShiftBoxes(View):
         box4 = BoxLevelFour.objects.first().box_words_four.first()
         box5 = BoxLevelFive.objects.first().box_words_five.first()
 
-        words = []
-        boxes_id = []
+        words1 = []
+        box_id1 = 0
+
+        words2 = []
+        box_id2 = 0
+
+        words3 = []
+        box_id3 = 0
+
+        words4 = []
+        box_id4 = 0
+
+        words5 = []
+        box_id5 = 0
 
         if box1:
-            words.append(list(box1.words.all()))
-            boxes_id.append(box1.id)
+            words1 = box1.words.all()
+            box_id1 = box1.id
 
         if box2:
-            words.append(list(box2.words.all()))
-            boxes_id.append(box2.id)
+            words2 = box2.words.all()
+            box_id2 = box2.id
 
         if box3:
-            words.append(list(box3.words.all()))
-            boxes_id.append(box3.id)
+            words3 = box3.words.all()
+            box_id3 = box3.id
         
         if box4:
-            words.append(list(box4.words.all()))
-            boxes_id.append(box4.id)
+            words4 = box4.words.all()
+            box_id4 = box4.id
 
         if box5:
-            words.append(list(box5.words.all()))
-            boxes_id.append(box5.id)
+            words5 = box5.words.all()
+            box_id5 = box5.id
 
-        return render(request, self.template_name, {"words": words, "bId": boxes_id})
+        return render(request, self.template_name, {
+            "words1": words1, "id1": box_id1,
+            "words2": words2, "id2": box_id2,
+            "words3": words3, "id3": box_id3,
+            "words4": words4, "id4": box_id4,
+            "words5": words5, "id5": box_id5,
+            }
+        )
 
 
 class UnknownWordView(View):
@@ -296,6 +315,8 @@ class ShiftBoxView(View):
                 
                 newBox = BoxLevelTwo.objects.first()
                 if newBox.size < newBox.capacity:
+                    newBox.size += 1
+                    newBox.save()
                     box.box_level_two = newBox
                     box.box_level_one.size -= 1
                     box.box_level_one.save()
@@ -303,13 +324,15 @@ class ShiftBoxView(View):
                     box.save()
 
                 else:
-                    messages.error(request, "Next State is full!")
+                    messages.error(request, "Next Level is full!")
                     return redirect(request.META.get('HTTP_REFERER', 'pages:home'))
             
             elif box.box_level_two:
 
                 newBox = BoxLevelThree.objects.first()
                 if newBox.size < newBox.capacity:
+                    newBox.size += 1
+                    newBox.save()
                     box.box_level_three = newBox
                     box.box_level_two.size -= 1
                     box.box_level_two.save()
@@ -317,13 +340,15 @@ class ShiftBoxView(View):
                     box.save()
 
                 else:
-                    messages.error(request, "Next State is full!")
+                    messages.error(request, "Next Level is full!")
                     return redirect(request.META.get('HTTP_REFERER', 'pages:home'))
             
             elif box.box_level_three:
 
                 newBox = BoxLevelFour.objects.first()
                 if newBox.size < newBox.capacity:
+                    newBox.size += 1
+                    newBox.save()
                     box.box_level_four = newBox
                     box.box_level_three.size -= 1
                     box.box_level_three.save()
@@ -331,13 +356,15 @@ class ShiftBoxView(View):
                     box.save()
 
                 else:
-                    messages.error(request, "Next State is full!")
+                    messages.error(request, "Next Level is full!")
                     return redirect(request.META.get('HTTP_REFERER', 'pages:home'))
             
             elif box.box_level_four:
 
                 newBox = BoxLevelFive.objects.first()
                 if newBox.size < newBox.capacity:
+                    newBox.size += 1
+                    newBox.save()
                     box.box_level_five = newBox
                     box.box_level_four.size -= 1
                     box.box_level_four.save()
@@ -345,7 +372,7 @@ class ShiftBoxView(View):
                     box.save()
 
                 else:
-                    messages.error(request, "Next State is full!")
+                    messages.error(request, "Next Level is full!")
                     return redirect(request.META.get('HTTP_REFERER', 'pages:home'))
 
             else:

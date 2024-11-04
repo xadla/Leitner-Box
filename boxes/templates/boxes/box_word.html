@@ -1,15 +1,30 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block style %}{% static "boxes/box_word.css" %}{% endblock style %}
 
 {% block content %}
 
     {% if words %}
+    <div class="words">
+        <h2>All Words</h2>
         {% for word in words %}
-            <p>{{ word }}</p>
+        <div class="words-box">
+            <h4>{{ word }}</h4>
+            <p>{{ word.definition }}</p>
+            <div class="examples">
+                <h3>Example:</h3>
+                <p>{{ word.example }}</p>
+            </div>
+        </div>
         {% endfor %}
+    </div>
     {% else %}
         <h1>There is no Word in this box</h1>
     {% endif %}
 
-    <a href="{% url 'boxes:add_word' id %}">Add New Word</a>
+    <div class="add-word">
+        <a href="{% url 'boxes:add_word' id %}">Add New Word</a>
+    </div>
 
 {% endblock content %}
