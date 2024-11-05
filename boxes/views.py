@@ -161,11 +161,11 @@ class BoxesView(View):
 
             else:
                 words = None
-
-        for word in words:
-            for w in word:
-                w.example = w.example.replace("\n", "<br>")
-                w.definition = w.definition.replace("\n", "<br>")
+        if words:
+            for word in words:
+                for w in word:
+                    w.example = w.example.replace("\n", "<br>")
+                    w.definition = w.definition.replace("\n", "<br>")
 
         return render(
             request,

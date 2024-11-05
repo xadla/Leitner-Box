@@ -19,6 +19,8 @@
     text-align: center;
     border-radius: 20px;
     transition: background-color 0.4s ease;
+    display: inline-block;
+    margin-top: 10px;
 }
 
 .words a:hover{
@@ -45,17 +47,65 @@
     margin-bottom: 20px;
 }
 
-.word a{
+.word button{
     text-decoration: none;
     color: #FFFECB;
     padding: 10px 30px;
-    margin-top: 50px;
     background-color: #789DBC;
     border-radius: 10px;
     transition: background-color 0.3s ease;
     font-size: 1.2rem;
+    outline: none;
+    border: none;
+    cursor: pointer;
 }
 
-.word a:hover{
+.word button:hover{
     background-color: #A2D2DF;
+}
+
+.container{
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+
+.unknown-box{
+    background-color: rgba(158, 143, 143, 0.7);
+    backdrop-filter: blur(12px);
+    width: 1200px;
+    height: 500px;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.unknown-box h1{
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.unknown-box button{
+    width: 100px;
+    padding: 10px;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    background-color: #CBDCEB;
+    color: #133E87;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.unknown-box button:hover{
+    background-color: #4A628A;
 }

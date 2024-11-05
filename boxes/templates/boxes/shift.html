@@ -5,42 +5,44 @@
 
 {% block content %}
 
-    {% if words1 %}
+    {% if id1 != 0 %}
         <div class="words">
             <h2>Words in First Box</h2>
             {% for word in words1 %}
             <div class="word">
                 <h5>{{ word }}</h5>
                 <p>{{ word.example|safe }}</p>
-                <a href="{% url 'boxes:unknown_word' word.id %}">Unknown</a>
+                <button class="unknown" onclick="show_unknown('{{ word.definition }}', '{{ word.id }}')">
+                    Unknown
+                </button>
             </div>
             {% endfor %}
             <a href="{% url 'boxes:shift_box' id1 %}">Shift First Box</a>
         </div>
     {% endif %}
 
-    {% if words2 %}
+    {% if id2 != 0 %}
         <div class="words">
             <h2>Words in Second Box</h2>
             {% for word in words2 %}
             <div class="word">
                 <h5>{{ word }}</h5>
                 <p>{{ word.example|safe }}</p>
-                <a href="{% url 'boxes:unknown_word' word.id %}">Unknown</a>
+                <button class="unknown" onclick="show_unknown('{{ word.definition }}', '{{ word.id }}')">Unknown</button>
             </div>
             {% endfor %}
             <a href="{% url 'boxes:shift_box' id2 %}">Shift Second Box</a>
         </div>
     {% endif %}
 
-    {% if words3 %}
+    {% if id3 != 0 %}
         <div class="words">
             <h2>Words in Third Box</h2>
             {% for word in words3 %}
             <div class="word">
                 <h5>{{ word }}</h5>
                 <p>{{ word.example|safe }}</p>
-                <a href="{% url 'boxes:unknown_word' word.id %}">Unknown</a>
+                <button class="unknown" onclick="show_unknown('{{ word.definition }}', '{{ word.id }}')">Unknown</button>
             </div>
             {% endfor %}
             <a href="{% url 'boxes:shift_box' id3 %}">Shift Third Box</a>
@@ -48,32 +50,59 @@
     {% endif %}
 
 
-    {% if words4 %}
+    {% if id4 != 0 %}
         <div class="words">
             <h2>Words in Fourth Box</h2>
             {% for word in words4 %}
             <div class="word">
                 <h5>{{ word }}</h5>
                 <p>{{ word.example|safe }}</p>
-                <a href="{% url 'boxes:unknown_word' word.id %}">Unknown</a>
+                <button class="unknown" onclick="show_unknown('{{ word.definition }}', '{{ word.id }}')">Unknown</button>
             </div>
             {% endfor %}
             <a href="{% url 'boxes:shift_box' id4 %}">Shift Fourth Box</a>
         </div>
     {% endif %}
 
-    {% if words5 %}
+    {% if id5 != 0 %}
         <div class="words">
             <h2>Words in Fifth Box</h2>
             {% for word in words5 %}
             <div class="word">
                 <h5>{{ word }}</h5>
                 <p>{{ word.example|safe }}</p>
-                <a href="{% url 'boxes:unknown_word' word.id %}">Unknown</a>
+                <button class="unknown" onclick="show_unknown('{{ word.definition }}', '{{ word.id }}')">Unknown</button>
             </div>
             {% endfor %}
             <a href="{% url 'boxes:shift_box' id5 %}">Shift Fifth Box</a>
         </div>
     {% endif %}
+
+    <div class="container" id="box-unknown">
+        <div class="unknown-box">
+            <h1 id="message-unknown"></h1>
+            <button onclick="hide_box()">Ok</button>
+        </div>
+    </div>
+
+    <script>
+
+        let id = -1;
+
+        function show_unknown(definition, id_func){
+            id = id_func;
+            document.getElementById("message-unknown").innerText = definition;
+            document.getElementById("box-unknown").style.display = "flex";
+        }
+
+        function hide_box(){
+            if (id == -1){
+                return;
+            }
+            document.getElementById("box-unknown").style.display = "none";
+            window.location.href = "/boxes/unknown/" + id;
+        }
+
+    </script>
 
 {% endblock content %}
