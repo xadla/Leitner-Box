@@ -241,11 +241,27 @@ class ShiftBoxes(View):
 
     def get(self, request):
 
-        box1 = BoxLevelOne.objects.first().box_words_one.first()
-        box2 = BoxLevelTwo.objects.first().box_words_two.first()
-        box3 = BoxLevelThree.objects.first().box_words_three.first()
-        box4 = BoxLevelFour.objects.first().box_words_four.first()
-        box5 = BoxLevelFive.objects.first().box_words_five.first()
+        box1 = None
+        box2 = None
+        box3 = None
+        box4 = None
+        box5 = None
+
+        boxOne = BoxLevelOne.objects.first()
+        if boxOne.size == boxOne.capacity:
+            box1 = boxOne.box_words_one.first()
+        boxTwo = BoxLevelTwo.objects.first()
+        if boxTwo.size == boxTwo.capacity:
+            box2 = boxTwo.box_words_two.first()
+        boxThree = BoxLevelThree.objects.first()
+        if boxThree.size == boxThree.capacity:
+            box3 = boxThree.box_words_three.first()
+        boxFour = BoxLevelFour.objects.first()
+        if boxFour.size == boxFour.capacity:
+            box4 = boxFour.box_words_four.first()
+        boxFive = BoxLevelFive.objects.first()
+        if boxFive.size == boxFive.capacity:
+            box5 = boxFive.box_words_five.first()
 
         words1 = []
         box_id1 = 0
@@ -414,4 +430,18 @@ class ShiftBoxView(View):
 
         except BoxWord.DoesNotExist:
             messages.error(request, "This Box is not exist")
+            return redirect("pages:home")
+
+
+class RemoveBoxView(View):
+
+    def get(self, request, id_box):
+        try:
+            box = BoxWord.objects.get(pk=id_box)
+            box.delete()
+            messages.success(request, "Box Deleted!")
+            return redirect("pages:home")
+
+        except BoxWord.DoesNotExist:
+            messages.error(request, "This Box is not exist!")
             return redirect("pages:home")

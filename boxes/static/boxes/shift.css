@@ -1,12 +1,14 @@
 .words{
-    background-color: #FBFBFB;
+    background-color: #C9BBCF;
     padding: 50px;
     text-align: center;
+    margin: 20px 0;
+    box-shadow: 10px 10px 20px rgba(158, 143, 143, 0.2);
 }
 
 .words h2{
     font-size: 2rem;
-    color: #DE8F5F;
+    color: #FFFFD0;
     text-align: center;
 }
 

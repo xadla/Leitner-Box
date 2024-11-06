@@ -23,8 +23,9 @@
         <h1 class="no-word">There is no Word in this box</h1>
     {% endif %}
 
-    <div class="add-word">
-        <a href="{% url 'boxes:add_word' id %}">Add New Word</a>
+    <div class="options">
+        <a href="{% url 'boxes:add_word' id %}" class="add">Add New Word</a>
+        <a href="{% url 'boxes:remove_box' id %}" class="remove">Delete</a>
     </div>
 
 {% endblock content %}
