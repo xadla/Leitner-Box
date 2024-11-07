@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+{% static "boxes/boxes.css" %}
+{% endblock style %}
+
+{% block content %}
+{% if words %}
+    <div class="container">
+        {% for word in words %}
+        <div class="word-box">
+            <h3>The Box with ID-{{ forloop.counter }}</h3>
+            {% if word %}
+                {% for w in word %}
+                <div class="word-detail">
+                    <h5>{{ w.name }}</h5>
+                    <p>{{ w.example|safe }}</p>
+                    <a href="{% url 'boxes:delete_word' w.id %}" class="remove">Remove</a>
+                </div>
+                {% endfor %}
+            {% else %}
+                <h2>There is no word in this box</h2>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+
+    <div class="empty">
+        <h2>There is no Read Box</h2>
+    </div>
+
+    {% endif %}
+
+    {% for b in box %}
+
+    <a href="{% url 'boxes:box_detail' b.id %}" class="click-box"> Box {{ forloop.counter }} </a>
+
+    {% endfor %}
+{% endblock content %}

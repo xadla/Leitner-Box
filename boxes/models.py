@@ -121,6 +121,8 @@ class BoxWord(models.Model):
         on_delete=models.CASCADE
     )
 
+    read = models.BooleanField(default=False)
+
     def get_absolute_url():
         return reverse("boxes:box_detail", kwargs={"id": self.pk})
 

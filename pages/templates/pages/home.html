@@ -5,6 +5,9 @@
 
 {% block content %}
 
+    <div class="triangle"></div>
+    <div class="circle"></div>
+
     <main class="main">
 
         <h2>All Boxes</h2>
@@ -19,7 +22,8 @@
         </div>
 
         <div class="shift">
-            <a href="{% url 'boxes:shift' %}">Shift Boxes</a>
+            <a href="{% url 'boxes:shift' %}">Read Boxes</a>
+            <a href="{% url 'boxes:read_box' %}">Words are readed</a>
         </div>
 
     </main>

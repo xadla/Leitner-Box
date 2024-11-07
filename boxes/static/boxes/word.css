@@ -36,6 +36,13 @@
     cursor: pointer;
     background-color: #789DBC;
     color: #DFF2EB;
+    margin: 20px auto;
+    transition: background-color 0.3s ease;
+    font-size: 1.5rem;
+}
+
+.submit:hover{
+    background-color: #465b6d;
 }
 
 .labels{

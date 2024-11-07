@@ -424,7 +424,8 @@ class ShiftBoxView(View):
             else:
                 box.box_level_five.size -= 1
                 box.box_level_five.save()
-                box.delete()
+                box.box_level_five = None
+                box.read = True
 
             return redirect(request.META.get('HTTP_REFERER', 'pages:home'))
 
@@ -438,6 +439,23 @@ class RemoveBoxView(View):
     def get(self, request, id_box):
         try:
             box = BoxWord.objects.get(pk=id_box)
+
+            if box.box_level_one:
+                box.box_level_one.size -= 1
+                box.box_level_one.save()
+            elif box.box_level_two:
+                box.box_level_two.size -= 1
+                box.box_level_two.save()
+            elif box.box_level_three:
+                box.box_level_three.size -= 1
+                box.box_level_three.save()
+            elif box.box_level_four:
+                box.box_level_four.size -= 1
+                box.box_level_four.save()
+            elif box.box_level_five:
+                box.box_level_five.size -= 1
+                box.box_level_five.save()
+
             box.delete()
             messages.success(request, "Box Deleted!")
             return redirect("pages:home")
@@ -445,3 +463,22 @@ class RemoveBoxView(View):
         except BoxWord.DoesNotExist:
             messages.error(request, "This Box is not exist!")
             return redirect("pages:home")
+
+
+class BoxesReadView(View):
+
+    template_name = "boxes/read_box.html"
+
+    def get(self, request):
+        box = BoxWord.objects.filter(read=True)
+
+        words = []
+
+        for b in box:
+            words.append(list(b.words.all()))
+
+        return render(
+            request,
+            self.template_name,
+            {"box": box, "words": words},
+            )

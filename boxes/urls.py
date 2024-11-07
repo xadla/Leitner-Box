@@ -11,6 +11,7 @@ from .views import (
     UnknownWordView,
     ShiftBoxView,
     RemoveBoxView,
+    BoxesReadView
 )
 
 app_name = "boxes"
@@ -25,4 +26,5 @@ urlpatterns = [
     path("unknown/<int:id_word>/", UnknownWordView.as_view(), name="unknown_word"),
     path("shift/<int:id_box>/", ShiftBoxView.as_view(), name="shift_box"),
     path("remove/<int:id_box>/", RemoveBoxView.as_view(), name="remove_box"),
+    path("read/", BoxesReadView.as_view(), name="read_box"),
 ]

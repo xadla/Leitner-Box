@@ -9,12 +9,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #fff;
     padding: 50px;
 }
 
 .boxes ul{
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(22px);
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
     list-style: none;
     padding: 20px;
@@ -46,6 +46,8 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .shift a{
@@ -53,14 +55,37 @@
     text-decoration: none;
     font-size: 2rem;
     color: #133E87;
-    background-color: #CBDCEB;
+    background-color: rgba(255, 255, 255, 0.7);
     text-align: center;
     width: 100%;
     border-radius: 10px;
     max-width: 600px;
     transition: background-color 0.3s ease;
+    margin-top: 10px;
 }
 
 .shift a:hover{
     background-color: #C6E7FF;
+}
+
+.triangle{
+    width: 700px;
+	height: 700px;
+	border-left: 450px solid transparent;
+	border-right: 450px solid transparent;
+	border-bottom: 700px solid #FFDDAE;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.circle{
+    width: 700px;
+    height: 700px;
+    border-radius: 100%;
+    background-color: #C5D3E8;
+    position: fixed;
+    z-index: -1;
+    right: 10%;
 }

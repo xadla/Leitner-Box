@@ -111,3 +111,7 @@
 .unknown-box button:hover{
     background-color: #4A628A;
 }
+
+.word p{
+    font-size: 1.7rem;
+}
