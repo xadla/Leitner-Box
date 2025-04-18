@@ -426,6 +426,7 @@ class ShiftBoxView(View):
                 box.box_level_five.save()
                 box.box_level_five = None
                 box.read = True
+                box.save()
 
             return redirect(request.META.get('HTTP_REFERER', 'pages:home'))
 
