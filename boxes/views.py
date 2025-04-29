@@ -346,7 +346,7 @@ class UnknownWordView(View):
 
         except Word.DoesNotExist:
 
-            messages.error(request, "This word is not exist")
+            messages.error(request, "There isn't a word like this")
             return redirect("pages:home")
 
 
